@@ -103,6 +103,7 @@ extension QRScannerView {
     func found(code: String) {
         delegate?.qrScanningSucceededWithCode(code)
     }
+    
 }
 
 extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {

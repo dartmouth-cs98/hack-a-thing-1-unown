@@ -70,6 +70,7 @@ extension QRScannerViewController: QRScannerViewDelegate {
     func qrScanningSucceededWithCode(_ str: String?) {
         self.qrData = QRData(codeString: str)
     }
+    
 }
 
 
@@ -80,4 +81,3 @@ extension QRScannerViewController {
         }
     }
 }
-
