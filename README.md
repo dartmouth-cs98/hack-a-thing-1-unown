@@ -12,7 +12,7 @@ Neither of us have any experience with Swift and iOS programming, and thought it
 
 When you run the app it asks for permission to use the camera. When "stop" is pressed, the screen will stop on the current scence and not scan for QR codes. Once detected a QR code, the app jumps to a second interface that gives the result for scanning. The user also has the option to go back to the previous page or visit the link attached to the QR code through web.
 
-![](IMG_0772.JPG)
+![](IMG_0776.JPG)
 
 ### Distribution of Work
 
