@@ -3,7 +3,7 @@
 //  UnownScanner
 //
 //  Created by Lkiron on 9/21/19.
-//  Copyright © 2019 Qirong Li. All rights reserved.
+//  Copyright © 2019 Qirong Li and Xinchen Zhao. All rights reserved.
 //
 
 import UIKit
@@ -31,6 +31,7 @@ class CopyLabel: UILabel {
         ))
     }
     
+    // copy to clipboard
     override func copy(_ sender: Any?) {
         UIPasteboard.general.string = text
         UIMenuController.shared.setMenuVisible(false, animated: true)
