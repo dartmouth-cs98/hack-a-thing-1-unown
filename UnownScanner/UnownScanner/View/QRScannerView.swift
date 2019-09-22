@@ -3,14 +3,14 @@
 //  UnownScanner
 //
 //  Created by Lkiron on 9/21/19.
-//  Copyright © 2019 Qirong Li. All rights reserved.
+//  Copyright © 2019 Qirong Li and Xinchen Zhao. All rights reserved.
 //
+
 
 import Foundation
 import UIKit
 import AVFoundation
 
-/// Delegate callback for the QRScannerView.
 protocol QRScannerViewDelegate: class {
     func qrScanningDidFail()
     func qrScanningSucceededWithCode(_ str: String?)
@@ -21,10 +21,8 @@ class QRScannerView: UIView {
     
     weak var delegate: QRScannerViewDelegate?
     
-    /// capture settion which allows us to start and stop scanning.
     var captureSession: AVCaptureSession?
-    
-    // Init methods..
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         doInitialSetup()
@@ -57,11 +55,11 @@ extension QRScannerView {
         delegate?.qrScanningDidStop()
     }
     
-    /// Does the initial setup for captureSession
     private func doInitialSetup() {
         clipsToBounds = true
         captureSession = AVCaptureSession()
         
+        // Get an instance of the AVCaptureDeviceInput class
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
         do {
@@ -78,11 +76,13 @@ extension QRScannerView {
             return
         }
         
+        // Initialize a AVCaptureMetadataOutput object
         let metadataOutput = AVCaptureMetadataOutput()
         
         if (captureSession?.canAddOutput(metadataOutput) ?? false) {
             captureSession?.addOutput(metadataOutput)
             
+            // Set delegate and use the default dispatch queue to execute the call back
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr, .ean8, .ean13, .pdf417]
         } else {
@@ -93,6 +93,7 @@ extension QRScannerView {
         self.layer.session = captureSession
         self.layer.videoGravity = .resizeAspectFill
         
+        // Start video capture.
         captureSession?.startRunning()
     }
     func scanningDidFail() {
