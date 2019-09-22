@@ -51,24 +51,33 @@ class QRScannerViewController: UIViewController {
 
     @IBAction func scanButtonAction(_ sender: UIButton) {
         scannerView.isRunning ? scannerView.stopScanning() : scannerView.startScanning()
+        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
+        sender.setTitle(buttonTitle, for: .normal)
     }
 }
 
 
 extension QRScannerViewController: QRScannerViewDelegate {
-    
     func qrScanningDidStop() {
-
+        let buttonTitle = scannerView.isRunning ? "STOP" : "SCAN"
+        scanButton.setTitle(buttonTitle, for: .normal)
     }
     
     func qrScanningDidFail() {
-
+        presentAlert(withTitle: "Error", message: "Scanning Failed. Please try again")
     }
     
-    func qrScanningSucceededWithCode() {
-        
+    func qrScanningSucceededWithCode(_ str: String?) {
+        self.qrData = QRData(codeString: str)
     }
-    
-    
-    
 }
+
+
+extension QRScannerViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSeuge", let viewController = segue.destination as? DetailViewController {
+            viewController.qrData = self.qrData
+        }
+    }
+}
+
