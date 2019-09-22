@@ -2,7 +2,7 @@
 
 Hack-a-thing 1 for CS98
 
-Qieong Li and Xinchen Zhao
+Qirong Li and Xinchen Zhao
 
 ### Our Project
 
